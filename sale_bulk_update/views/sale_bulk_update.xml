@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="planned_dates_tree_view" model="ir.ui.view">
+        <field name="name">planned.dates.tree.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='activity_ids']" position="after">
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="planned_days"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="planned_dates_update_server" model="ir.actions.server">
+        <field name="name">Update Dates</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = model.planned_dates_update()
+<!--            records.planned_dates_update()-->
+        </field>
+    </record>
+</odoo>
